@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LumenOptimizer.UI.Pages.IntegratorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:LumenOptimizer.UI.ViewModels">
+
+    <Grid Padding="32,8,32,8" RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Spacing="2">
+            <TextBlock Text="Integrator" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock TextWrapping="Wrap" Opacity="0.75"
+                       Text="Adds entries to the right-click menu for your user account only. Switching one off removes it completely. On Windows 11 they appear under 'Show more options' (Shift + F10)."/>
+        </StackPanel>
+
+        <InfoBar x:Name="ResultBar" Grid.Row="1" IsOpen="False"/>
+
+        <ListView Grid.Row="2" ItemsSource="{x:Bind Items}" SelectionMode="None">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="0,0,0,4"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="vm:ContextItemViewModel">
+                    <Grid ColumnSpacing="12" Padding="4,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Spacing="2">
+                            <TextBlock Text="{x:Bind Title}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                            <TextBlock Text="{x:Bind Description}" TextWrapping="Wrap" Opacity="0.75"/>
+                        </StackPanel>
+                        <ToggleSwitch Grid.Column="1" OnContent="Added" OffContent="Not added" MinWidth="0"
+                                      IsOn="{x:Bind IsOn}" Tag="{x:Bind}" Toggled="ToggleChanged"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

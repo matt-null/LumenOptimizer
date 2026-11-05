@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LumenOptimizer.UI.Pages.SplashPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14" MaxWidth="560" Padding="24,32">
+
+            <Image x:Name="LogoImage" Width="96" Height="96" HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Lumen Optimizer" Style="{StaticResource TitleLargeTextBlockStyle}" HorizontalAlignment="Center"/>
+            <TextBlock Text="Tune, clean and debloat Windows 10 and 11, one step at a time."
+                       TextAlignment="Center" TextWrapping="Wrap" Opacity="0.75"/>
+
+            <InfoBar x:Name="AdminBar" Severity="Warning" IsOpen="False" IsClosable="False"
+                     Title="Not running as administrator"
+                     Message="Most tweaks will fail. Close the app and start it again as administrator."/>
+            <InfoBar x:Name="SupportBar" Severity="Warning" IsOpen="False" IsClosable="False"
+                     Title="Windows support"/>
+
+            <StackPanel x:Name="ScanPanel" Spacing="8" HorizontalAlignment="Center" Margin="0,12,0,0">
+                <ProgressRing x:Name="Ring" IsActive="True" Width="40" Height="40"/>
+                <TextBlock x:Name="ScanText" Text="Scanning your system…" HorizontalAlignment="Center" Opacity="0.7"/>
+            </StackPanel>
+
+            <StackPanel x:Name="ReadyPanel" Visibility="Collapsed" Spacing="10" HorizontalAlignment="Center" Margin="0,12,0,0">
+                <TextBlock x:Name="ProfileText" TextAlignment="Center" TextWrapping="Wrap" FontSize="12" Opacity="0.6"/>
+                <TextBlock x:Name="SummaryText" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.75"/>
+                <Button x:Name="StartButton" Content="Get started" MinWidth="220" HorizontalAlignment="Center"
+                        Style="{StaticResource AccentButtonStyle}" Click="StartClick"/>
+                <Button x:Name="LoadButton" Content="Load a saved selection…" MinWidth="220" HorizontalAlignment="Center"
+                        Click="LoadSelectionClick"/>
+                <TextBlock x:Name="LoadText" TextAlignment="Center" TextWrapping="Wrap" FontSize="12" Opacity="0.7"/>
+                <Button x:Name="ToolsButton" Content="Tools: Cleaner, Startup, Uninstaller…" MinWidth="220" HorizontalAlignment="Center"
+                        Click="ToolsClick"/>
+                <Button x:Name="UndoButton" Content="Undo previous changes" MinWidth="220" HorizontalAlignment="Center"
+                        Click="UndoClick"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LumenOptimizer.UI.Pages.MemoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:LumenOptimizer.UI.ViewModels">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="32,8,32,24" Spacing="12" MaxWidth="900" HorizontalAlignment="Center">
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Memory" Style="{StaticResource TitleTextBlockStyle}"/>
+                <TextBlock TextWrapping="Wrap" Opacity="0.75"
+                           Text="What your RAM is doing, and the three things Windows actually lets an app do about it."/>
+            </StackPanel>
+
+            <InfoBar Severity="Informational" IsOpen="True" IsClosable="False"
+                     Title="Read this before using the buttons"
+                     Message="Empty RAM is wasted RAM. Windows fills spare memory with cached file data on purpose, and gives it up the moment a program needs it. Clearing it does not make the PC faster, and usually makes the next few seconds slower because the data has to be read from disk again. These actions are worth it in narrow cases: stutter in a game right after copying large files, or freeing the cache before a benchmark."/>
+
+            <InfoBar x:Name="FlashBar" Severity="Warning" IsOpen="False" IsClosable="False"
+                     Title="Not a good idea on this PC"
+                     Message="Windows runs from an SD card, USB drive or eMMC here. Everything these buttons drop has to be read back from that slow drive, so they will make the PC feel worse, and the extra writes wear the card."/>
+
+            <Grid ColumnSpacing="16" RowSpacing="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="TotalText" Grid.Row="0" Grid.Column="0"/>
+                <TextBlock x:Name="InUseText" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock x:Name="AvailableText" Grid.Row="1" Grid.Column="0"/>
+                <TextBlock x:Name="CachedText" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock x:Name="CommitText" Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="ProcessText" Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+            <ProgressBar x:Name="LoadBar" Maximum="100" Height="8"/>
+            <TextBlock x:Name="LoadText" FontSize="12" Opacity="0.65"/>
+
+            <InfoBar x:Name="ResultBar" IsOpen="False"/>
+
+            <TextBlock Text="Actions" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button Content="Refresh" Click="RefreshClick"/>
+                <Button x:Name="StandbyButton" Content="Empty standby list" Tag="standby" Click="ActionClick"/>
+                <Button x:Name="ModifiedButton" Content="Flush modified pages" Tag="modified" Click="ActionClick"/>
+                <Button x:Name="TrimButton" Content="Trim working sets" Tag="trim" Click="ActionClick"/>
+                <ProgressRing x:Name="Ring" Width="20" Height="20" IsActive="False"/>
+            </StackPanel>
+
+            <TextBlock Text="Biggest memory users" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
+            <TextBlock TextWrapping="Wrap" Opacity="0.7" FontSize="12"
+                       Text="Closing one of these is the only thing that really frees memory for good. Lumen Optimizer does not close them for you; use the app itself or Task Manager."/>
+            <ListView x:Name="ProcessList" ItemsSource="{x:Bind Processes}" SelectionMode="None" MaxHeight="320">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ProcessMemoryViewModel">
+                        <Grid Padding="4,4" ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{x:Bind Name}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="1" Text="{x:Bind Details}" Opacity="0.7" FontSize="12"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

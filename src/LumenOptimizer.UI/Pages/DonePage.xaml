@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LumenOptimizer.UI.Pages.DonePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14" MaxWidth="640" Padding="24,32">
+
+            <Border x:Name="IconBorder" Width="88" Height="88" CornerRadius="44" HorizontalAlignment="Center"
+                    Background="SeaGreen">
+                <FontIcon x:Name="IconGlyph" Glyph="&#xE73E;" FontSize="40" Foreground="White"/>
+            </Border>
+
+            <TextBlock x:Name="TitleText" Style="{StaticResource TitleLargeTextBlockStyle}" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="SummaryText" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.8"/>
+
+            <InfoBar x:Name="RestartBar" Severity="Informational" IsOpen="False" IsClosable="False"
+                     Title="Restart needed"
+                     Message="Some changes only take full effect after you restart or sign out."/>
+
+            <TextBlock x:Name="ErrorsText" TextWrapping="Wrap" IsTextSelectionEnabled="True" Opacity="0.85" Visibility="Collapsed"/>
+
+            <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center" Margin="0,8,0,0">
+                <Button x:Name="RestartButton" Content="Restart now" Style="{StaticResource AccentButtonStyle}"
+                        Visibility="Collapsed" Click="RestartClick"/>
+                <Button Content="Start over" Click="StartOverClick"/>
+                <Button Content="Close" Click="CloseClick"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

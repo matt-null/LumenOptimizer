@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LumenOptimizer.UI.Pages.NetworkPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="32,8,32,24" Spacing="12" MaxWidth="900" HorizontalAlignment="Center">
+            <StackPanel Spacing="2">
+                <TextBlock Text="Network tools" Style="{StaticResource TitleTextBlockStyle}"/>
+                <TextBlock TextWrapping="Wrap" Opacity="0.75"
+                           Text="Repair a flaky connection, run quick checks, or switch DNS provider. Repairs ask before they run."/>
+            </StackPanel>
+
+            <InfoBar x:Name="ResultBar" IsOpen="False"/>
+
+            <TextBlock Text="Repair" Style="{StaticResource SubtitleTextBlockStyle}"/>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button Content="Flush DNS cache" Tag="dns" Click="RepairClick"/>
+                <Button Content="Release and renew IP" Tag="renew" Click="RepairClick"/>
+                <Button Content="Reset Winsock" Tag="winsock" Click="RepairClick"/>
+                <Button Content="Reset TCP/IP stack" Tag="tcpip" Click="RepairClick"/>
+            </StackPanel>
+
+            <TextBlock Text="DNS provider" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ComboBox x:Name="DnsBox" MinWidth="260" DisplayMemberPath="Name" PlaceholderText="Choose a provider"/>
+                <Button Content="Apply…" Click="ApplyDnsClick"/>
+                <Button x:Name="RestoreDnsButton" Content="Restore original DNS" Click="RestoreDnsClick"/>
+                <Button Content="Show current" Click="ShowDnsClick"/>
+            </StackPanel>
+
+            <TextBlock Text="Check" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBox x:Name="HostBox" Text="1.1.1.1" MinWidth="260" PlaceholderText="Host name or IP address"/>
+                <Button Content="Ping" Tag="ping" Click="CheckClick"/>
+                <Button Content="Trace route" Tag="trace" Click="CheckClick"/>
+                <Button Content="DNS lookup" Tag="lookup" Click="CheckClick"/>
+                <Button Content="IP configuration" Tag="ipconfig" Click="CheckClick"/>
+            </StackPanel>
+
+            <ProgressBar x:Name="Progress" IsIndeterminate="True" Visibility="Collapsed"/>
+            <TextBox x:Name="OutputBox" IsReadOnly="True" AcceptsReturn="True" TextWrapping="NoWrap" FontFamily="Consolas" FontSize="12"
+                     Height="260" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

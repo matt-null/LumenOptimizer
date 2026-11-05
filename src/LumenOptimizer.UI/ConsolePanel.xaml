@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="LumenOptimizer.UI.ConsolePanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="0,1,0,0">
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Padding="16,6,12,6" ColumnSpacing="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <FontIcon Glyph="&#xE756;" FontSize="14"/>
+                    <TextBlock Text="Console" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="CountText" Opacity="0.6" FontSize="12" VerticalAlignment="Center"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Copy" Click="CopyClick"/>
+                <Button Grid.Column="2" Content="Save log…" Click="SaveClick"/>
+                <Button Grid.Column="3" Content="Clear" Click="ClearClick"/>
+                <Button Grid.Column="4" Content="Hide" Click="HideClick"/>
+            </Grid>
+
+            <ScrollViewer x:Name="Scroller" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                          Padding="16,0,16,8">
+                <TextBlock x:Name="LogText" FontFamily="Consolas" FontSize="12" IsTextSelectionEnabled="True"
+                           TextWrapping="NoWrap"/>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</UserControl>

@@ -38,8 +38,28 @@ public sealed partial class AboutPage : Page
             EmailLink.Visibility = Visibility.Visible;
         }
 
-        ContactPanel.Visibility = WebsiteLink.Visibility == Visibility.Visible || EmailLink.Visibility == Visibility.Visible
-            ? Visibility.Visible : Visibility.Collapsed;
+        if (!string.IsNullOrWhiteSpace(StudioInfo.Phone))
+        {
+            PhoneLink.Content = StudioInfo.Phone;
+            PhoneLink.NavigateUri = new Uri(StudioInfo.PhoneLink);
+            PhoneLink.Visibility = Visibility.Visible;
+        }
+
+        ContactPanel.Visibility = Visibility.Visible;
+        ApplyLogo();
+        ActualThemeChanged += (_, _) => ApplyLogo();
+    }
+
+    private void ApplyLogo() => StudioLogo.Source = AppIcons.StudioLogo(ActualTheme == ElementTheme.Dark);
+
+    private async void UpdateClick(object sender, RoutedEventArgs e)
+    {
+        UpdateButton.IsEnabled = false;
+        UpdateStatus.Text = "Checking...";
+        var r = await UpdateFlow.CheckAsync();
+        UpdateStatus.Text = r.Message;
+        UpdateButton.IsEnabled = true;
+        if (r.Update is not null) await UpdateFlow.OfferAsync(XamlRoot, r.Update);
     }
 
     private void BackClick(object sender, RoutedEventArgs e) => MainWindow.Current?.CloseAbout();

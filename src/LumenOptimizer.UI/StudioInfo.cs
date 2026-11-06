@@ -6,7 +6,7 @@ namespace LumenOptimizer.UI;
 public static class StudioInfo
 {
     public const string Name = "Alright Dev";
-    public const string Version = "0.4.3";
+    public const string Version = "0.4.4";
 
     public const string Tagline = "Software, smart home and business development.";
 
@@ -15,7 +15,12 @@ public static class StudioInfo
 
     /// <summary>Fill these in to show contact links on the About page. Leave empty to hide them.</summary>
     public const string Website = "https://alrightdev.com";
-    public const string Email = "";
+    /// <summary>GitHub repo that hosts the releases the updater checks.</summary>
+    public const string GitHubOwner = "matt-null";
+    public const string GitHubRepo = "LumenOptimizer";
+    public const string Email = "hello@alrightdev.com";
+    public const string Phone = "+1 (541) 876-7873";
+    public const string PhoneLink = "tel:+15418767873";
 
     public static IReadOnlyList<StudioProject> Services { get; } = new StudioProject[]
     {

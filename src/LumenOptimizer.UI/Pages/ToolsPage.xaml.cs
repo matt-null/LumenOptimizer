@@ -25,6 +25,12 @@ public sealed partial class ToolsPage : Page
             case "Uninstaller": main.ShowTool(typeof(UninstallerPage), "Uninstaller"); break;
             case "Hosts": main.ShowTool(typeof(HostsPage), "Hosts editor"); break;
             case "Integrator": main.ShowTool(typeof(IntegratorPage), "Integrator"); break;
+            case "Services": main.ShowTool(typeof(ManagerPage), "Services", "Services"); break;
+            case "Tasks": main.ShowTool(typeof(ManagerPage), "Scheduled tasks", "Tasks"); break;
+            case "Accounts": main.ShowTool(typeof(ManagerPage), "Local accounts", "Accounts"); break;
+            case "ForceDelete": main.ShowTool(typeof(ManagerPage), "Force delete", "ForceDelete"); break;
+            case "Disks": main.ShowTool(typeof(ManagerPage), "Optimize drives", "Disks"); break;
+            case "UsbClean": main.ShowTool(typeof(ManagerPage), "USB drive cleaner", "UsbClean"); break;
             case "Network": main.ShowTool(typeof(NetworkPage), "Network tools"); break;
         }
     }

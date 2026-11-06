@@ -6,6 +6,7 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Padding="32,8,32,24" Spacing="12" MaxWidth="820" HorizontalAlignment="Center">
+            <StackPanel.ChildrenTransitions><TransitionCollection><EntranceThemeTransition IsStaggeringEnabled="True" FromVerticalOffset="24"/></TransitionCollection></StackPanel.ChildrenTransitions>
             <StackPanel Spacing="2">
                 <TextBlock Text="Tools" Style="{StaticResource TitleTextBlockStyle}"/>
                 <TextBlock TextWrapping="Wrap" Opacity="0.75"
@@ -65,6 +66,48 @@
                 <StackPanel Spacing="2">
                     <TextBlock Text="Network tools" FontWeight="SemiBold"/>
                     <TextBlock Text="Flush DNS, renew your IP, reset Winsock and TCP/IP, ping, trace route, and switch DNS provider with an undo."
+                               TextWrapping="Wrap" Opacity="0.75"/>
+                </StackPanel>
+            </Button>
+            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16,12" Tag="Services" Click="ToolClick">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Services" FontWeight="SemiBold"/>
+                    <TextBlock Text="Change how background services start, with the original saved so you can restore it."
+                               TextWrapping="Wrap" Opacity="0.75"/>
+                </StackPanel>
+            </Button>
+            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16,12" Tag="Tasks" Click="ToolClick">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Scheduled tasks" FontWeight="SemiBold"/>
+                    <TextBlock Text="See and disable the tasks Windows and programs run on a schedule."
+                               TextWrapping="Wrap" Opacity="0.75"/>
+                </StackPanel>
+            </Button>
+            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16,12" Tag="Disks" Click="ToolClick">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Optimize drives" FontWeight="SemiBold"/>
+                    <TextBlock Text="Defragment hard disks and TRIM SSDs. USB and SD flash is skipped on purpose."
+                               TextWrapping="Wrap" Opacity="0.75"/>
+                </StackPanel>
+            </Button>
+            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16,12" Tag="UsbClean" Click="ToolClick">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="USB / SD drive cleaner" FontWeight="SemiBold"/>
+                    <TextBlock Text="Remove junk files from removable drives. Also offered when you plug one in."
+                               TextWrapping="Wrap" Opacity="0.75"/>
+                </StackPanel>
+            </Button>
+            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16,12" Tag="ForceDelete" Click="ToolClick">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Force delete" FontWeight="SemiBold"/>
+                    <TextBlock Text="Remove files and folders that will not delete: ownership, SYSTEM, delete at restart."
+                               TextWrapping="Wrap" Opacity="0.75"/>
+                </StackPanel>
+            </Button>
+            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16,12" Tag="Accounts" Click="ToolClick">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Local accounts" FontWeight="SemiBold"/>
+                    <TextBlock Text="Reset a forgotten local password, unlock or enable accounts, manage administrators."
                                TextWrapping="Wrap" Opacity="0.75"/>
                 </StackPanel>
             </Button>

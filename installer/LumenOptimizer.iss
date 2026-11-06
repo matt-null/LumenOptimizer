@@ -2,7 +2,7 @@
 [Setup]
 AppId={{B7E1C3A2-4D59-4F0B-8A6E-2C9D1F3E5A70}
 AppName=Lumen Optimizer
-AppVersion=0.4.3
+AppVersion=0.4.4
 AppPublisher=Alright Dev
 SetupIconFile=..\src\LumenOptimizer.UI\Assets\AppIcon.ico
 AppPublisherURL=https://alrightdev.com

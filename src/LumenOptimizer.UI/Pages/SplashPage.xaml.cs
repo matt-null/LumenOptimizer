@@ -13,6 +13,29 @@ public sealed partial class SplashPage : Page
     {
         InitializeComponent();
         LogoImage.Source = AppIcons.Logo();
+        Loaded += (_, _) => PlayLogoIntro();
+    }
+
+    /// <summary>Logo fades in and settles with a small bounce.</summary>
+    private void PlayLogoIntro()
+    {
+        var ease = new Microsoft.UI.Xaml.Media.Animation.BackEase { EasingMode = Microsoft.UI.Xaml.Media.Animation.EasingMode.EaseOut, Amplitude = 0.5 };
+        var sb = new Microsoft.UI.Xaml.Media.Animation.Storyboard();
+        void Add(DependencyObject target, string prop, double to, int ms, bool bounce)
+        {
+            var a = new Microsoft.UI.Xaml.Media.Animation.DoubleAnimation
+            {
+                To = to, Duration = TimeSpan.FromMilliseconds(ms), EnableDependentAnimation = true,
+                EasingFunction = bounce ? ease : null
+            };
+            Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTarget(a, target);
+            Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTargetProperty(a, prop);
+            sb.Children.Add(a);
+        }
+        Add(LogoImage, "Opacity", 1, 450, false);
+        Add(LogoScale, "ScaleX", 1, 650, true);
+        Add(LogoScale, "ScaleY", 1, 650, true);
+        sb.Begin();
     }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)

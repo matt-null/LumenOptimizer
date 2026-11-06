@@ -16,7 +16,8 @@ public sealed partial class MainWindow : Window
     private bool _standalone;
     private Action? _backOverride;
 
-    public static MainWindow? Current { get; private set; }
+    private LumenOptimizer.Core.Tools.RemovableWatcher? _usbWatcher;
+    public static new MainWindow? Current { get; private set; }
 
     public MainWindow()
     {
@@ -56,6 +57,27 @@ public sealed partial class MainWindow : Window
         ConsoleDock.HideRequested += () => SetConsoleOpen(false);
 
         ShowSplash();
+
+        // Offer to clean a USB stick / SD card when one is plugged in.
+        _usbWatcher = new LumenOptimizer.Core.Tools.RemovableWatcher();
+        _usbWatcher.DriveArrived += d => DispatcherQueue.TryEnqueue(async () =>
+        {
+            try
+            {
+                if (!LumenOptimizer.Core.Tools.RemovableCleaner.PromptEnabled || !BackButton.IsEnabled || Content is not FrameworkElement root) return;
+                if (await Dialogs.ConfirmAsync(root.XamlRoot, "Drive plugged in",
+                        $"{d.Name} {d.VolumeLabel} was just connected. Scan it for junk files?", "Open the drive cleaner"))
+                    ShowTool(typeof(ManagerPage), "USB drive cleaner", "UsbClean");
+            }
+            catch { }
+        });
+
+        if (Content is FrameworkElement fe)
+            fe.Loaded += async (_, _) =>
+            {
+                try { await Task.Delay(1500); await UpdateFlow.StartupCheckAsync(fe.XamlRoot); }
+                catch (Exception ex) { LumenOptimizer.Core.Util.Log.Warn("Startup update check: " + ex.Message); }
+            };
     }
 
     // -------------------------------------------------------------- console
@@ -139,7 +161,7 @@ public sealed partial class MainWindow : Window
     }
 
     /// <summary>Opens one tool page. Back returns to the tools hub.</summary>
-    public void ShowTool(Type page, string title)
+    public void ShowTool(Type page, string title, object? param = null)
     {
         _standalone = true;
         _index = -1;
@@ -148,7 +170,7 @@ public sealed partial class MainWindow : Window
         BackButton.Visibility = Visibility.Visible;
         NextButton.Visibility = Visibility.Collapsed;
         StepText.Text = title;
-        ContentFrame.Navigate(page, null, new SlideNavigationTransitionInfo { Effect = SlideNavigationTransitionEffect.FromRight });
+        ContentFrame.Navigate(page, param, new SlideNavigationTransitionInfo { Effect = SlideNavigationTransitionEffect.FromRight });
     }
 
     /// <summary>Tool pages call this while an action runs so the user cannot navigate away mid-change.</summary>

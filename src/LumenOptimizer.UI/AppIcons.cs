@@ -5,6 +5,17 @@ namespace LumenOptimizer.UI;
 /// <summary>Loads the logo straight from the app folder. Unpackaged apps cannot rely on ms-appx:/// paths.</summary>
 public static class AppIcons
 {
+    /// <summary>Alright Dev wordmark. Black text for light theme, white text for dark theme.</summary>
+    public static BitmapImage? StudioLogo(bool dark)
+    {
+        try
+        {
+            var path = Path.Combine(AppContext.BaseDirectory, "Assets", dark ? "AlrightDev-forDark.png" : "AlrightDev-forLight.png");
+            return File.Exists(path) ? new BitmapImage(new Uri(path)) : null;
+        }
+        catch { return null; }
+    }
+
     public static BitmapImage? Logo()
     {
         try

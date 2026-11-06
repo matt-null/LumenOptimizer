@@ -32,6 +32,8 @@
   <ItemGroup>
     <Content Include="Assets\AppIcon.ico" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\AppIcon.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\AlrightDev-forDark.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\AlrightDev-forLight.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

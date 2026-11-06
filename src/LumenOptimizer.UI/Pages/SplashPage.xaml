@@ -7,7 +7,10 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14" MaxWidth="560" Padding="24,32">
 
-            <Image x:Name="LogoImage" Width="96" Height="96" HorizontalAlignment="Center"/>
+            <Image x:Name="LogoImage" Width="96" Height="96" HorizontalAlignment="Center"
+                   RenderTransformOrigin="0.5,0.5" Opacity="0">
+                <Image.RenderTransform><ScaleTransform x:Name="LogoScale" ScaleX="0.6" ScaleY="0.6"/></Image.RenderTransform>
+            </Image>
 
             <TextBlock Text="Lumen Optimizer" Style="{StaticResource TitleLargeTextBlockStyle}" HorizontalAlignment="Center"/>
             <TextBlock Text="Tune, clean and debloat Windows 10 and 11, one step at a time."
@@ -25,6 +28,7 @@
             </StackPanel>
 
             <StackPanel x:Name="ReadyPanel" Visibility="Collapsed" Spacing="10" HorizontalAlignment="Center" Margin="0,12,0,0">
+                <StackPanel.ChildrenTransitions><TransitionCollection><EntranceThemeTransition IsStaggeringEnabled="True" FromVerticalOffset="24"/></TransitionCollection></StackPanel.ChildrenTransitions>
                 <TextBlock x:Name="ProfileText" TextAlignment="Center" TextWrapping="Wrap" FontSize="12" Opacity="0.6"/>
                 <TextBlock x:Name="SummaryText" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.75"/>
                 <Button x:Name="StartButton" Content="Get started" MinWidth="220" HorizontalAlignment="Center"
